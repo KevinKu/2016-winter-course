@@ -1,0 +1,160 @@
+xu6wu6gj@kmtath:~/2016-winter-course/test1$ gdb swap
+GNU gdb (Ubuntu 7.7.1-0ubuntu5~14.04.2) 7.7.1
+Copyright (C) 2014 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from swap...done.
+(gdb) l
+126	
+127	
+128	
+129	return head;
+130	
+131	
+132	
+133	}
+134	
+135	int main(){return 0;}
+(gdb) b 135
+Breakpoint 1 at 0x40072a: file swap.c, line 135.
+(gdb) r
+Starting program: /home/xu6wu6gj/2016-winter-course/test1/swap 
+
+Breakpoint 1, main () at swap.c:135
+135	int main(){return 0;}
+(gdb) p $head = (List*)malloc(sizeof(List))
+$1 = (List *) 0x602010
+(gdb) p $head->value = 1
+$2 = 1
+(gdb) p $head->next = (List*)malloc(sizeof(List))
+$3 = (struct List_node *) 0x602030
+(gdb) p $head->next->value = 2
+$4 = 2
+(gdb) p $head->next->next = (List*)malloc(sizeof(List))
+$5 = (struct List_node *) 0x602050
+(gdb) p $head->next->next->value = 3
+$6 = 3
+(gdb) p $head->next->next->next = (List*)malloc(sizeof(List))
+$7 = (struct List_node *) 0x602070
+(gdb) p $head->next->next->next->value = 4
+$8 = 4
+(gdb) p $head->next->next->next->next
+$9 = (struct List_node *) 0x0
+(gdb) p $head->value
+$10 = 1
+(gdb) p $head->next->value
+$11 = 2
+(gdb) p $head->next->next->value
+$12 = 3
+(gdb) p $head->next->next->next->value
+$13 = 4
+(gdb) p $head->next->next->next->next
+$14 = (struct List_node *) 0x0
+(gdb) p $head = swap($head,$head,$head->next->next->next)
+$15 = (List *) 0x602070
+(gdb) p $head->value
+$16 = 4
+(gdb) p $head->next->value
+$17 = 2
+(gdb) p $head->next->next->value
+$18 = 3
+(gdb) p $head->next->next->next->value
+$19 = 1
+(gdb) p $head = swap($head,$head->next->next->next,$head)
+$20 = (List *) 0x602010
+(gdb) p $head->value
+$21 = 1
+(gdb) p $head->next->value
+$22 = 2
+(gdb) p $head->next->next->value
+$23 = 3
+(gdb) p $head->next->next->next->value
+$24 = 4
+(gdb) p $head->next->next->next->next
+$25 = (struct List_node *) 0x0
+(gdb) $head = swap($head,$head->next,$head->next->next)
+Undefined command: "$head".  Try "help".
+(gdb) p $head = swap($head,$head->next,$head->next->next)
+$26 = (List *) 0x602010
+(gdb) p $head->value
+$27 = 1
+(gdb) p $head->next->value
+$28 = 3
+(gdb) p $head->next->next->value
+$29 = 2
+(gdb) p $head->next->next->next->value
+$30 = 4
+(gdb) p $head = swap($head,$head->next,$head->next->next)
+$31 = (List *) 0x602010
+(gdb) p $head->value
+$32 = 1
+(gdb) p $head->next->value
+$33 = 2
+(gdb) p $head->next->next->value
+$34 = 3
+(gdb) p $head->next->next->next->value
+$35 = 4
+(gdb) p $head = swap($head,$head->next,$head->next->next->next)
+$36 = (List *) 0x602010
+(gdb) p $head->value
+$37 = 1
+(gdb) p $head->next->value
+$38 = 4
+(gdb) p $head->next->next->value
+$39 = 3
+(gdb) p $head->next->next->next->value
+$40 = 2
+(gdb) p $head = swap($head,$head->next,$head->next->next->next)
+$41 = (List *) 0x602010
+(gdb) p $head = swap($head,$head,$head->next)
+$42 = (List *) 0x602030
+(gdb) p $head->value
+$43 = 2
+(gdb) p $head->next->value
+$44 = 1
+(gdb) p $head->next->next->value
+$45 = 3
+(gdb) p $head->next->next->next->value
+$46 = 4
+(gdb) p $head = swap($head,$head->next->next,$head->next->next->next)
+$47 = (List *) 0x602030
+(gdb) p $head->value
+$48 = 2
+(gdb) p $head->next->value
+$49 = 1
+(gdb) p $head->next->next->value
+$50 = 4
+(gdb) p $head->next->next->next->value
+$51 = 3
+(gdb) p $head = swap($head,$head,$head->next->next->next->next)
+$52 = (List *) 0x602030
+(gdb) p $head->value
+$53 = 2
+(gdb) p $head->next->value
+$54 = 1
+(gdb) p $head->next->next->value
+$55 = 4
+(gdb) p $head->next->next->next->value
+$56 = 3
+(gdb) set $head2 = $head->next
+(gdb) p $head2 = swap($head2,$head,$head2)
+$57 = (List *) 0x602010
+(gdb) p $head2->value
+$58 = 1
+(gdb) p $head2->next->value
+$59 = 4
+(gdb) p $head2->next->next->value
+$60 = 3
+(gdb) p $head2->next->next->next->value
+Cannot access memory at address 0x0
+
