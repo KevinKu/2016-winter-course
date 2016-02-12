@@ -1,0 +1,53 @@
+#!/bin/bash
+
+
+
+
+echo b main >> _tmp.gdb
+echo r >> _tmp.gdb
+echo source create__list.gdb>> _tmp.gdb
+echo source printf_list.gdb>> _tmp.gdb
+
+echo 'set $head = (List*)0'>>_tmp.gdb
+
+
+exec < $1
+
+read var
+echo 'create_list $head' $var>> _tmp.gdb
+
+exec < $1
+
+
+
+
+
+echo 'p "test begin------------------------------------------------------------------------------------------"'>>_tmp.gdb
+
+
+
+while (read var)
+do
+
+echo 'p "old_list-------------------------------------------------------------------------------------------"'>>_tmp.gdb
+
+echo 'printf_list $head'>> _tmp.gdb
+
+read var
+node_1=$var
+read var
+node_2=$var
+
+echo 'p $head = swap($head,'$node_1','$node_2')'>> _tmp.gdb
+
+echo 'p "new_list-----------------------------------------------------------------------------------------"'>>_tmp.gdb
+
+echo 'printf_list $head'>> _tmp.gdb
+
+done
+
+
+
+gdb -x _tmp.gdb swap >>$2
+
+rm _tmp.gdb
