@@ -4,7 +4,10 @@
 
 void bubble_sort(List **head){
 
-if(*head == NULL)
+
+
+
+if(head == NULL||(*head == NULL))
 	return ;
 
 
